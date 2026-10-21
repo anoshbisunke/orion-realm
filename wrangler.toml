@@ -2,6 +2,11 @@ name = "orion-realm"
 main = "./worker.js"
 compatibility_date = "2026-10-21"
 
+[[d1_databases]]
+binding = "DB"
+database_name = "orion-realm-db"
+database_id = "ecb2fb7d-0d44-4afa-a241-ff0d2d912c0d"
+
 [assets]
 directory = "."
 binding = "ASSETS"
