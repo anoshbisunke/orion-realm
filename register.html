@@ -221,7 +221,10 @@ form.addEventListener("submit", async (event) => {
 
         const data = await response.json();
 
-        message.textContent = data.message ||
+        message.textContent = data.message || data.error ||
+    (response.ok
+        ? "Registration request completed."
+        : "Registration failed. HTTP status: " + response.status);
             (response.ok
                 ? "Registration request completed."
                 : "Registration failed. Please try again.");
