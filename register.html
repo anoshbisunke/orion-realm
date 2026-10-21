@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08090d">
+
+    <title>Create Account | Orion Realm</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #08090d;
+            color: #f5f5f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 35px;
+            background: #11131b;
+            border: 1px solid #252a3a;
+            border-radius: 18px;
+            box-shadow: 0 0 40px rgba(87, 108, 255, 0.08);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: #a5b4fc;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #9298aa;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #c4c8d5;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            background: #090b12;
+            border: 1px solid #303548;
+            border-radius: 9px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 9px;
+            background: #818cf8;
+            color: #08090d;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #a5b4fc;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #9298aa;
+        }
+
+        .footer a {
+            color: #a5b4fc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="register-container">
+
+        <div class="logo">ORION REALM</div>
+
+        <p class="subtitle">Create your account and begin your journey.</p>
+
+        <form id="registerForm">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    minlength="3"
+                    maxlength="30"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    maxlength="254"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a strong password"
+                    minlength="12"
+                    maxlength="128"
+                    autocomplete="new-password"
+                    required
+                >
+            </div>
+
+            <button type="submit" id="registerButton">
+                Create Account
+            </button>
+
+        </form>
+
+        <div id="message" role="status" aria-live="polite"></div>
+
+        <div class="footer">
+            Already have an account?
+            <a href="login.html">Sign in</a>
+        </div>
+
+    </main>
+
+    <script>
+        const form = document.getElementById("registerForm");
+        const button = document.getElementById("registerButton");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            message.style.display = "none";
+            button.disabled = true;
+            button.textContent = "Please wait...";
+
+            /*
+             * Backend connection will be added
+             * in our next step.
+             */
+
+            message.textContent =
+                "Your registration page is ready. Backend connection is our next step.";
+
+            message.style.display = "block";
+            message.style.background = "#252a3a";
+            message.style.color = "#c7d2fe";
+
+            button.disabled = false;
+            button.textContent = "Create Account";
+        });
+    </script>
+
+</body>
+</html>
