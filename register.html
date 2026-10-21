@@ -196,33 +196,65 @@
     </main>
 
     <script>
-        const form = document.getElementById("registerForm");
-        const button = document.getElementById("registerButton");
-        const message = document.getElementById("message");
+    const form = document.getElementById("registerForm");
+    const button = document.getElementById("registerButton");
+    const message = document.getElementById("message");
 
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-            message.style.display = "none";
-            button.disabled = true;
-            button.textContent = "Please wait...";
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
 
-            /*
-             * Backend connection will be added
-             * in our next step.
-             */
+        button.disabled = true;
+        button.textContent = "Creating account...";
 
-            message.textContent =
-                "Your registration page is ready. Backend connection is our next step.";
+        message.style.display = "none";
+
+        try {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+            const data = await response.json();
+
+            message.textContent = data.message ||
+                (data.success
+                    ? "Registration successful!"
+                    : "Registration failed. Please try again.");
 
             message.style.display = "block";
-            message.style.background = "#252a3a";
-            message.style.color = "#c7d2fe";
 
+            if (response.ok && data.success) {
+                message.style.background = "#123524";
+                message.style.color = "#86efac";
+                form.reset();
+            } else {
+                message.style.background = "#3b1c24";
+                message.style.color = "#fda4af";
+            }
+
+        } catch (error) {
+            message.textContent =
+                "Unable to connect to the server. Please try again.";
+
+            message.style.display = "block";
+            message.style.background = "#3b1c24";
+            message.style.color = "#fda4af";
+
+        } finally {
             button.disabled = false;
             button.textContent = "Create Account";
-        });
-    </script>
+        }
+    });
+</script>
 
 </body>
 </html>
